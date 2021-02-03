@@ -1,11 +1,21 @@
-import Editor from '@monaco-editor/react';
+import MonacoEditor from '@monaco-editor/react';
 
 const CodeEditor: React.FunctionComponent = () => {
   return (
-    <Editor
+    <MonacoEditor
+      theme="vs-dark"
       height="500px"
-      defaultLanguage="javascript"
-      defaultValue="// some comment"
+      language="javascript"
+      options={{
+        wordWrap: 'on',
+        minimap: { enabled: false },
+        showUnused: false,
+        folding: false,
+        lineNumbersMinChars: 3,
+        fontSize: 16,
+        scrollBeyondLastLine: false,
+        automaticLayout: true,
+      }}
     />
   );
 };
