@@ -8,7 +8,7 @@ import CodeEditor from './components/code-editor';
 const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string | undefined>();
 
   const startService = async () => {
     ref.current = await esbuild.startService({
@@ -62,7 +62,10 @@ const App = () => {
 
   return (
     <div>
-      <CodeEditor initialValue="const a = 1;" />
+      <CodeEditor
+        initialValue="const a = 1;"
+        onChange={(value) => setInput(value)}
+      />
       <textarea
         value={input}
         onChange={(event) => setInput(event.target.value)}
