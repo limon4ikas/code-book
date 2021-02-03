@@ -45,7 +45,13 @@ const App = () => {
       <div id="root"></div>
       <script>
         window.addEventListener('message', (event) => {
+          try {
           eval(event.data)
+          } catch (error) {
+            const root = document.querySelector('#root');
+            root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>';
+            console.error(error);
+          }
         }, false)
       </script>
     </body>
@@ -62,9 +68,18 @@ const App = () => {
         <button onClick={handleClick}>Submit</button>
       </div>
       <pre>{code}</pre>
-      <iframe ref={iframe} sandbox="allow-scripts" srcDoc={html} />
+      <iframe ref={iframe} title="code" sandbox="allow-scripts" srcDoc={html} />
     </div>
   );
 };
 
 ReactDOM.render(<App />, document.querySelector('#root'));
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+
+// const App = () => {
+//   return <div>Hi there!</div>
+// }
+
+// ReactDOM.render(<App />, document.getElementById('root'))
