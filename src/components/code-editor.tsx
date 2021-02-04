@@ -50,7 +50,7 @@ const CodeEditor: React.FunctionComponent<CodeEditorProps> = ({
         onMount={handleEditorDidMount}
         value={initialValue}
         theme="vs-dark"
-        height="500px"
+        height="100%"
         language="javascript"
         options={{
           wordWrap: 'on',

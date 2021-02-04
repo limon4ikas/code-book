@@ -34,6 +34,7 @@ const Preview: React.FunctionComponent<PreviewProps> = ({ code }) => {
 
   return (
     <iframe
+      style={{ backgroundColor: 'white' }}
       title="preview"
       ref={iframe}
       sandbox="allow-scripts"
