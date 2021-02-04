@@ -35,7 +35,7 @@ const Resizable: React.FunctionComponent<ResizableProps> = ({
     return () => {
       window.removeEventListener('resize', listener);
     };
-  }, []);
+  }, [width]);
 
   if (direction === 'horizontal') {
     resizableProps = {
