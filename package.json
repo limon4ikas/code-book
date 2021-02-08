@@ -21,6 +21,7 @@
     "esbuild-wasm": "0.8.27",
     "immer": "^8.0.1",
     "localforage": "^1.9.0",
+    "lodash": "^4.17.20",
     "monaco-editor": "0.22.3",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
@@ -56,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168"
   }
 }
