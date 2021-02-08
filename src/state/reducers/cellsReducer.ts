@@ -40,21 +40,19 @@ initialState.data[welcome_text] = {
   content: welcome_text_content,
 };
 
-const welcome_code_content = `import {useState} from 'react';
+const welcome_code_content = `import { useState } from 'react';
 
 const Counter = () => {
   const [count, setCount] = useState(0);
   return (
     <div>
       <button onClick={() => setCount(count + 1)}>Click</button>
-      <h3>Count</h3>
+      <h3>{count}</h3>
     </div>
-  )
+  );
+};
 
-}
-
-show(Counter)
-`;
+show(<Counter />);`;
 initialState.data[welcome_code] = {
   id: 'welcome_code',
   type: 'code',
