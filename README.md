@@ -12,7 +12,7 @@ esbuild is used for fast bundling and executing your code in the preview window
 
 ## Load packages from [UNPKG](https://unpkg.com/) on the fly
 
-Dynamicly load packages from unpkg
+Dynamicly import and load packages from unpkg
 
 ## Functions
 
