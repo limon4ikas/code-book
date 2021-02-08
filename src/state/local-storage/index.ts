@@ -16,7 +16,6 @@ export const loadState = (): RootState | undefined => {
 
 export const saveState = (state: RootState): void => {
   try {
-    console.log(state);
     const serializedState = JSON.stringify(state);
     localStorage.setItem('reduxState', serializedState);
   } catch (error) {
