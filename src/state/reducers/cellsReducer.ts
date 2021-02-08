@@ -15,8 +15,50 @@ interface CellsState {
 const initialState: CellsState = {
   loading: false,
   error: null,
-  order: [],
+  order: ['welcome_text', 'welcome_code'],
   data: {},
+};
+
+// Delete if not needed
+const welcome_text = 'welcome_text';
+const welcome_code = 'welcome_code';
+
+const welcome_text_content = `
+# CodeBook
+
+This is an interactive coding enviroment. You can write Javascript, see it executed and, write comprehensive documentation using markdown.
+
+- Click any text cell (including this one) to edit it
+- The code in each code editor is all joined together into one file. If you define a variable in cell #1, you can refer to it in any following cell!
+- You can show any React component, string, number, or anything else bu calling show functuion. This is a functuion built into this enviroment. Call show multiple times to show multiple values
+- Re-order or delete cells using button on the top rigth
+- Add new cells by hovering on the divider between each cell
+`;
+initialState.data[welcome_text] = {
+  id: 'welcome_text',
+  type: 'text',
+  content: welcome_text_content,
+};
+
+const welcome_code_content = `import {useState} from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Click</button>
+      <h3>Count</h3>
+    </div>
+  )
+
+}
+
+show(Counter)
+`;
+initialState.data[welcome_code] = {
+  id: 'welcome_code',
+  type: 'code',
+  content: welcome_code_content,
 };
 
 const reducer = produce((state: CellsState = initialState, action: Action) => {
