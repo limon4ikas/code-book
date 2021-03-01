@@ -6,11 +6,14 @@ import parser from 'prettier/parser-babel';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
+// import './jsx-highlight.css';
 
 interface CodeEditorProps {
   initialValue: string;
   onChange(value: string): void;
 }
+
+let monacoJSXHighlighter = null;
 
 const CodeEditor: React.FunctionComponent<CodeEditorProps> = ({
   initialValue,
@@ -25,12 +28,6 @@ const CodeEditor: React.FunctionComponent<CodeEditorProps> = ({
     const babelParse = (code: string) =>
       parse(code, { sourceType: 'module', plugins: ['jsx'] });
 
-    let monacoJSXHighlighter = null,
-      activateJSXHighlighting = null,
-      disposeJSXHighlighting = null,
-      activateJSXCommenting = null,
-      disposeJSXCommenting = null;
-
     monacoJSXHighlighter = new MonacoJSXHighlighter(
       monaco,
       babelParse,
@@ -38,11 +35,8 @@ const CodeEditor: React.FunctionComponent<CodeEditorProps> = ({
       editor
     );
 
-    activateJSXHighlighting =
-      monacoJSXHighlighter.highLightOnDidChangeModelContent;
-    disposeJSXHighlighting = activateJSXHighlighting();
-    activateJSXCommenting = monacoJSXHighlighter.addJSXCommentCommand;
-    disposeJSXCommenting = activateJSXCommenting();
+    monacoJSXHighlighter.highLightOnDidChangeModelContent(100);
+    monacoJSXHighlighter.addJSXCommentCommand();
 
     // Get value out to bundler
     editor.onDidChangeModelContent(() => {
