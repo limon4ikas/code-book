@@ -3,6 +3,9 @@ import { useRef } from 'react';
 import MonacoEditor, { OnMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
+import { parse } from '@babel/parser';
+import traverse from '@babel/traverse';
+import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
 
 interface CodeEditorProps {
   initialValue: string;
@@ -15,8 +18,31 @@ const CodeEditor: React.FunctionComponent<CodeEditorProps> = ({
 }) => {
   const editorRef = useRef<any>(null);
 
-  const handleEditorDidMount: OnMount = (editor) => {
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
+
+    // JSX Highlight
+    const babelParse = (code: string) =>
+      parse(code, { sourceType: 'module', plugins: ['jsx'] });
+
+    let monacoJSXHighlighter = null,
+      activateJSXHighlighting = null,
+      disposeJSXHighlighting = null,
+      activateJSXCommenting = null,
+      disposeJSXCommenting = null;
+
+    monacoJSXHighlighter = new MonacoJSXHighlighter(
+      monaco,
+      babelParse,
+      traverse,
+      editor
+    );
+
+    activateJSXHighlighting =
+      monacoJSXHighlighter.highLightOnDidChangeModelContent;
+    disposeJSXHighlighting = activateJSXHighlighting();
+    activateJSXCommenting = monacoJSXHighlighter.addJSXCommentCommand;
+    disposeJSXCommenting = activateJSXCommenting();
 
     // Get value out to bundler
     editor.onDidChangeModelContent(() => {
